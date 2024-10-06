@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alarm App</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="alarm.css" />
+  </head>
+  <body>
+    <h1 class="header">Alarm</h1>
+    <section class="clock">
+      <div class="outer"></div>
+      <div class="inner">
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line3"></div>
+      </div>
+    </section>
+    <section class="outertimer">
+      <div class="timer"></div>
+    </section>
+    <div class="alarms" id="alarms-container">
+      <!-- Dynamic alarms will be inserted here -->
+    </div>
+    <div class="create">
+      <button class="btn" id="create-btn">+</button>
+    </div>
+
+    <!-- Alarm setup container -->
+    <div class="container" id="alarm-container">
+      <div class="content">
+        <div class="left-group">
+          <span class="icon"
+            ><i class="fa-solid fa-xmark" id="close-icon"></i
+          ></span>
+          <h1>Add Alarm</h1>
+        </div>
+        <span class="icon"
+          ><i class="fa-solid fa-check" id="save-icon"></i
+        ></span>
+      </div>
+      <div class="time-selector">
+        <select id="hour-select">
+          <!-- Options for hours will be added dynamically -->
+        </select>
+        <select id="minute-select">
+          <!-- Options for minutes will be added dynamically -->
+        </select>
+        <select id="ampm-select">
+          <!-- Options for AM/PM will be added dynamically -->
+        </select>
+      </div>
+    </div>
+
+    <script src="alarm.js"></script>
+  </body>
+</html>

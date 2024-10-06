@@ -1,0 +1,337 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 60px; /* Padding to ensure content doesn't hide behind the fixed header */
+}
+
+.header {
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 100;
+  text-align: left;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  position: fixed; /* Fixed header */
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background-color: black;
+}
+
+.clock {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 200px;
+  margin-top: 10px; /* Margin to adjust position below the fixed header */
+  z-index: 1; /* Ensure clock is below header */
+}
+
+.outer {
+  background-color: rgba(69, 67, 67, 0.936);
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  position: relative;
+}
+
+.inner {
+  background-color: black;
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.line1,
+.line2,
+.line3 {
+  position: absolute;
+  background-color: white;
+  transform-origin: bottom center;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.line1 {
+  height: 60px;
+  width: 4px;
+  top: 30px;
+}
+
+.line2 {
+  height: 70px;
+  width: 4px;
+  background-color: aqua;
+  top: 20px;
+}
+
+.line3 {
+  height: 80px;
+  width: 2px;
+  background-color: red;
+  top: 10px;
+}
+
+.outertimer {
+  text-align: center;
+}
+
+.timer {
+  padding: 10px 20px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 10px;
+}
+
+.create {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+
+.btn {
+  background-color: green;
+  color: white;
+  font-size: 3rem;
+  border: none;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.alarms {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  /* Responsive columns */
+  gap: 1rem;
+  margin: 2rem auto; /* Center the container and set top and bottom margins to 2rem */
+  width: calc(100% - 4rem); /* Full width minus the margins */
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Adjustments for medium screens */
+@media (max-width: 1024px) {
+  .alarms {
+    grid-template-columns: 1fr 1fr 1fr;
+    margin: 2rem auto; /* Maintain top and bottom margins of 2rem */
+    width: calc(100% - 2rem); /* Adjust width */
+  }
+}
+
+/* Adjustments for small screens */
+@media (max-width: 600px) {
+  .alarms {
+    grid-template-columns: 1fr; /* Single column layout for small screens */
+    margin: 2rem auto; /* Maintain top and bottom margins of 2rem */
+    width: calc(100% - 1rem); /* Adjust width */
+  }
+}
+
+.alarm {
+  color: white;
+  font-weight: normal;
+  font-size: 0.7rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border: 2px solid rgba(69, 67, 67, 0.936);
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: black;
+  width: 100%; /* Make the alarm div responsive */
+  box-sizing: border-box; /* Include padding and border in the width */
+}
+
+.delete-button {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.container {
+  color: white;
+  width: 90%;
+  max-width: 30rem;
+  height: 20rem;
+  background-color: black;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 1rem;
+  box-sizing: border-box;
+  border: 2px solid rgba(69, 67, 67, 0.936);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Styles for the container when it's active */
+.container.active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 10; /* Make sure the container is on top */
+}
+
+/* Styles for the body when the container is active */
+.container.active ~ body {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s; /* Smooth transition */
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 3rem;
+}
+
+.left-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.icon {
+  font-size: 2rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+h1 {
+  margin: 0;
+  font-weight: normal;
+}
+
+.time-selector {
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.time-selector select {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+select {
+  background-color: black;
+  color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+.headdiv {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+.headstyle {
+  color: white;
+}
+
+@media (max-width: 300px) {
+  /* Adjust other headings if needed */
+  .container {
+    top: 14rem;
+  }
+  .container h1 {
+    font-size: 1.3rem; /* Default or adjusted font size for headings in the header */
+  }
+  .time-selector {
+    gap: 2rem;
+  }
+  .content {
+    margin-bottom: 4rem;
+  }
+  .content h1 {
+    font-size: 1.5rem;
+  }
+}
+.dismiss-button {
+  background-color: #f44336; /* Red color for dismiss */
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-left: 5px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.dismiss-button:hover {
+  background-color: #d32f2f; /* Darker red on hover */
+}
+.alarm-controls {
+  position: fixed; /* Use fixed positioning to center it */
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(
+    -50%,
+    -50%
+  ); /* Adjust for the width and height of the div */
+  width: 300px;
+  height: 200px;
+  background-color: black;
+  border: 2px solid #ccc;
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Shadow effect */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center items horizontally */
+  justify-content: center; /* Center items vertically */
+  z-index: 1000; /* Ensure it's on top of other elements */
+}
+
+.alarm-controls h2 {
+  color: white;
+  margin-bottom: 20px; /* Spacing below the heading */
+  padding: 1rem 2rem;
+}
+
+.stop-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: red;
+  color: white;
+  border: none; /* Remove border */
+  border-radius: 5px; /* Rounded button corners */
+  cursor: pointer;
+}
+
+.stop-button:hover {
+  cursor: pointer;
+}
